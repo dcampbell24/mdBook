@@ -6,7 +6,7 @@ use std::io::Write;
 use std::io::ErrorKind;
 use std::process::Command;
 
-use {BookConfig, BookItem, theme, parse, utils};
+use {BookConfig, BookItem, theme, markdown, utils};
 use book::BookItems;
 use renderer::{Renderer, HtmlHandlebars};
 
@@ -441,7 +441,7 @@ impl MDBook {
     // Construct book
     fn parse_summary(&mut self) -> Result<(), Box<Error>> {
         // When append becomes stable, use self.content.append() ...
-        self.content = try!(parse::construct_bookitems(&self.src.join("SUMMARY.md")));
+        self.content = try!(markdown::summary::construct_bookitems(&self.src.join("SUMMARY.md")));
         Ok(())
     }
 }
